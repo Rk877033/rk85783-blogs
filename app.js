@@ -7,5 +7,5 @@ const port = process.env.PORT || 8000
 const app = express()
 
 app.listen(port, () => {
-  log.info(`Server is running on http://localhost:${port}`)
+    log.info(`Server is running on http://localhost:${port}`)
 })
