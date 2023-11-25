@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 21
+    },
+    "auditLog": "logs\\.95f56b02fafae1e245f61f0c0cebfdb411153023-audit.json",
+    "files": [
+        {
+            "date": 1700912185330,
+            "name": "logs\\LaneAxis-2023-11-25.log",
+            "hash": "d891ee6c90cf2c47c29f91d9ad626c9216b30f95418028678df500414c0ffd96"
+        }
+    ],
+    "hashType": "sha256"
+}
