@@ -26,5 +26,25 @@ class AdminController {
             log.error('dashboard(): catch error: %o', err)
         }
     }
+
+    static userList = async (req, res) => {
+        try {
+            log.info('userList(): req: %o', utils.reqObject(req, res))
+            const data = await UserModel.find(
+                { role: { $ne: 'admin' } }
+            )
+            console.log(data)
+            const responseObject = {
+                title: 'Dashboard',
+                user: req.decoded,
+                data,
+                successMessage: req.flash('success'),
+                errorMessage: req.flash('error')
+            }
+            res.render('admin/users_list', responseObject)
+        } catch (err) {
+            log.error('userList(): catch error: %o', err)
+        }
+    }
 }
 module.exports = AdminController

@@ -71,32 +71,28 @@
 															<%= item.email %>
 														</td>
 														<td>
-															<% if (item.role == 'Admin' ) { %>
-																<span class="btn btn-sm bg-danger text-white">
-																	<%= item.role %>
-																</span>
-															<% } else if (item.role == 'User' ) { %>
-																<span class="btn btn-sm bg-info text-white">
-																	<%= item.role %>
-																</span>
-															<% } else if (item.role == 'Author' ) { %>
+															<% if (item.role == 'author' ) { %>
 																<span class="btn btn-sm bg-success text-white">
+																	<%= item.role %>
+																</span>
+															<% } else if (item.role == 'user' ) { %>
+																<span class="btn btn-sm bg-info text-white">
 																	<%= item.role %>
 																</span>
 															<% } %>
 														</td>
 														<td>
-															<% if (item.status == 'Active') { %>
+															<% if (item.status == 'active') { %>
 																<span class="btn btn-sm bg-success text-white"><%= item.status %></span>
-															<% } else if (item.status == 'Inactive') { %>
+															<% } else if (item.status == 'inactive') { %>
 																<span class="btn btn-sm bg-warning text-white"><%= item.status %></span>
-															<% } else if (item.status == 'Block') { %>
+															<% } else if (item.status == 'block') { %>
 																<span class="btn btn-sm bg-danger text-white"><%= item.status %></span>
 															<% } %>
 														</td>
 														<td class="text-center">
-															<% if (item.profileImage.url) { %>
-																<img src="<%= item.profileImage.url %>" alt="<%= item.name %>">
+															<% if (item.profile_image) { %>
+																<img src="<%= item.profile_image.url %>" alt="<%= item.name %>">
 															<% } else { %>
 																<img src="../cool_admin/images/dummy_profile_image.png" alt="<%= item.name %>">
 															<% } %>

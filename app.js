@@ -1,6 +1,7 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const moment = require('moment')
+const path = require('path')
 dotenv.config()
 const session = require('express-session')
 const connectDB = require('./db/connect_db')
@@ -32,10 +33,11 @@ app.use(session({
 app.use(flash())
 
 // insert CSS, JS and images
-app.use(express.static('public'))
-app.use('/cool_admin', express.static('cool_admin'))
-app.use('/cloapedia', express.static('cloapedia'))
-app.use('/login_register', express.static('login_register'))
+// app.use(express.static('public'))
+// app.use('/cool_admin', express.static('cool_admin'))
+// app.use('/cloapedia', express.static('cloapedia'))
+// app.use('/login_register', express.static('login_register'))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Parse URL-encoded bodies
 app.use(express.json())

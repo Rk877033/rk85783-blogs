@@ -26,5 +26,6 @@ router.get('/author/dashboard', checkAuth, AuthorController.dashboard)
 
 // For Admin
 router.get('/admin/dashboard', checkAuth, AdminController.dashboard)
+router.get('/admin/users/list', checkAuth, AdminController.userList)
 
 module.exports = router
