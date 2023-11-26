@@ -63,6 +63,10 @@ app.use((req, res, next) => {
     }
     // Default to HTML
     // res.send('<h1>Page not found</h1>')
+    // res.render('front/404.ejs')
+    if ((req.originalUrl).includes('/admin')) {
+        return res.redirect('/admin/404')
+    }
     res.render('front/404.ejs')
 })
 

@@ -125,7 +125,11 @@
 					<div class="account-wrap">
 						<div class="account-item clearfix js-item-menu">
 							<div class="image">
-								<img src="../cool_admin/images/dummy_profile_image.png" alt="<%= user.name %>" />
+								<% if (user.profile_image.url) { %>
+									<img src="<%= user.profile_image.url %>" alt="<%= user.name %>" />
+								<% } else { %>
+									<img src="/cool_admin/images/dummy_profile_image.png" alt="Admin Name" />
+								<% } %>
 							</div>
 							<div class="content">
 								<a class="js-acc-btn" href="#"><%= user.name %></a>
@@ -134,7 +138,11 @@
 								<div class="info clearfix">
 									<div class="image">
 										<a href="#">
-											<img src="../cool_admin/images/dummy_profile_image.png" alt="<%= user.name %>" />
+											<% if (user.profile_image.url) { %>
+												<img src="<%= user.profile_image.url %>" alt="<%= user.name %>" />
+											<% } else { %>
+												<img src="/cool_admin/images/dummy_profile_image.png" alt="Admin Name" />
+											<% } %>
 										</a>
 									</div>
 									<div class="content">

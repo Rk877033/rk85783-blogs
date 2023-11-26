@@ -10,7 +10,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="login-form">
-					<form action="/admin/user" method="post" enctype="multipart/form-data">
+					<form action="/admin/user/add" method="post" enctype="multipart/form-data">
 						<div class="form-group">
 							<label>Name</label>
 							<input class="au-input au-input--full" type="text" name="name" placeholder="Name" required>
@@ -26,7 +26,7 @@
 						<div class="form-group">
 							<label>Role</label>
 							<select name="role" id="role" class="form-control" required>
-								<option value="admin">Admin</option>
+								<!-- <option value="admin">Admin</option> -->
 								<option value="user" selected>User (default)</option>
 								<option value="author">Author</option>
 							</select>
@@ -44,19 +44,6 @@
 									<input type="radio" id="inline-radio3" name="status" value="block" class="form-check-input" required>Block
 								</label>
 							</div>
-						</div>
-						<div class="form-group">
-							<label>Theme</label>
-							<select name="theme" id="color-options" class="form-control" required>
-								<option class="theme-1" value="theme-1">theme-1 (default)</option>
-								<option class="theme-2" value="theme-2">theme-2</option>
-								<option class="theme-3" value="theme-3">theme-3</option>
-								<option class="theme-4" value="theme-4">theme-4</option>
-								<option class="theme-5" value="theme-5">theme-5</option>
-								<option class="theme-6" value="theme-6">theme-6</option>
-								<option class="theme-7" value="theme-7">theme-7</option>
-								<option class="theme-8" value="theme-8">theme-8</option>
-							</select>
 						</div>
 						<div class="form-group">
 							<label for="profile_image">Profile Image</label>

@@ -10,7 +10,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="login-form">
-					<form action="/admin/delete-user" method="post" enctype="multipart/form-data">
+					<form action="" method="post" enctype="multipart/form-data">
 						<div class="form-group">
 							<label>Name</label>
 							<input class="au-input au-input--full" type="text" name="name"  placeholder="Name" readonly>
@@ -46,21 +46,8 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label>Theme</label>
-							<select name="theme" class="form-control color-options">
-								<option class="theme-1" value="theme-1">theme-1</option>
-								<option class="theme-2" value="theme-2">theme-2</option>
-								<option class="theme-3" value="theme-3">theme-3</option>
-								<option class="theme-4" value="theme-4">theme-4</option>
-								<option class="theme-5" value="theme-5">theme-5</option>
-								<option class="theme-6" value="theme-6">theme-6</option>
-								<option class="theme-7" value="theme-7">theme-7</option>
-								<option class="theme-8" value="theme-8">theme-8</option>
-							</select>
-						</div>
-						<div class="form-group">
 							<label>Profile Image</label>
-							<img class="profile_image_preview" src="" alt="Image Preview">
+							<img class="profile_image_preview" src="/cool_admin/images/dummy_profile_image.png" alt="Image Preview" width="200px">
 						</div>
 				</div>
 			</div>
@@ -83,6 +70,10 @@
 		$("#viewUserModal select[name='role']").val((item.role).toLowerCase());
 		$("#viewUserModal .form-check-input").filter('[value="' + (item.status).toLowerCase() + '"]').prop('checked', true);
 		$("#viewUserModal select[name='theme']").val(item.theme);
-		$("#viewUserModal .profile_image_preview").attr("src", item.profileImage.url);
+		if (item.profile_image && item.profile_image.url) {
+			$("#viewUserModal .profile_image_preview").attr("src", item.profile_image.url);
+		} else {
+			$("#viewUserModal .profile_image_preview").attr("src", "/cool_admin/images/dummy_profile_image.png");
+		}
 	}
 </script>

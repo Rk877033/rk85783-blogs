@@ -91,22 +91,20 @@
 															<% } %>
 														</td>
 														<td class="text-center">
-															<% if (item.profile_image) { %>
+															<% if (item.profile_image.url) { %>
 																<img src="<%= item.profile_image.url %>" alt="<%= item.name %>">
 															<% } else { %>
-																<img src="../cool_admin/images/dummy_profile_image.png" alt="<%= item.name %>">
+																<img src="/cool_admin/images/dummy_profile_image.png" alt="<%= item.name %>">
 															<% } %>
 														</td>
 														<td>
-															<%= item.createdAt %>
+															<%= moment(item.createdAt).format('MM/DD/YYYY HH:mm:ss') %>
 														</td>
 														<td>
-															<%= item.updatedAt %>
+															<%= moment(item.updatedAt).format('MM/DD/YYYY HH:mm:ss') %>
 														</td>
 														<td>
-															<button data-toggle="modal" data-target="#viewUserModal" data-id="<%= item.id %>" onclick="openViewModal(JSON.stringify(<%= JSON.stringify(item) %>))"><i class="fa fa-eye text-warning"></i></button>
-															<!-- <a href="/admin/user/edit/<%= item.id %>"><i class="fa fa-pencil-square-o text-success"></i></a> -->
-															<!-- <a href="/admin/user/delete/<%= item.id %>"><i class="fa fa-trash text-danger"></i></a> -->
+															<button data-toggle="modal" data-target="#viewUserModal" onclick="openViewModal(JSON.stringify(<%= JSON.stringify(item) %>))"><i class="fa fa-eye text-warning"></i></button>
 															<button data-toggle="modal" data-target="#editUserModal" onclick="openEditModal(JSON.stringify(<%= JSON.stringify(item) %>))"><i class="fa fa-pencil-square-o text-success"></i></button>
 															<button data-toggle="modal" data-target="#deleteUserModal"><i class="fa fa-trash text-danger"></i></button>
 														</td>
