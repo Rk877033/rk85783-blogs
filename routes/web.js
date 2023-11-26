@@ -29,6 +29,11 @@ router.get('/admin/dashboard', checkAuth, AdminController.dashboard)
 router.get('/admin/users/list', checkAuth, AdminController.userList)
 router.post('/admin/user/add', checkAuth, AdminController.userAdd)
 router.post('/admin/user/:id/delete', checkAuth, AdminController.userDelete)
+router.post('/admin/user/:id/update', checkAuth, AdminController.userUpdate)
 router.get('/admin/404', checkAuth, AdminController.pageNotFound)
+
+// router.get('**', (req, res) => {
+//     return res.redirect('/admin/404')
+// })
 
 module.exports = router

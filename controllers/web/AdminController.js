@@ -36,11 +36,12 @@ class AdminController {
 
     static userList = async (req, res) => {
         try {
-            log.info('userList(): req: %o', utils.reqObject(req, res))
+            // log.info('userList(): req: %o', utils.reqObject(req, res))
+            log.info('userList(): req.query: %o', req.query)
             const data = await UserModel.find(
                 { role: { $ne: 'admin' } }
             )
-            console.log(data)
+            // console.log(data)
             const responseObject = {
                 title: 'Dashboard',
                 user: req.decoded,
@@ -108,16 +109,65 @@ class AdminController {
         }
     }
 
+    static userUpdate = async (req, res) => {
+        try {
+            log.info('userUpdate(): req.params: %o', req.params)
+            log.info('userUpdate(): req.body: %o', req.body)
+            log.info('userUpdate(): req.files: %o', req.files)
+            let data = {}
+            if (req.files) {
+                const user = await UserModel.findById(req.params.id)
+                const imageId = user.profile_image.public_id
+                await cloudinary.uploader.destroy(imageId)
+                const file = req.files.profile_image
+                const imageUpload = await cloudinary.uploader.upload(file.tempFilePath, {
+                    folder: 'rk85873-blogs/profileImage'
+                })
+                fs.unlink(file.tempFilePath, (err) => {
+                    if (err) {
+                        throw err
+                    }
+                    console.log('Deleted Successfully!')
+                })
+                data = {
+                    name: req.body.name,
+                    email: req.body.email,
+                    role: req.body.role,
+                    status: req.body.state,
+                    profile_image: {
+                        public_id: imageUpload.public_id,
+                        url: imageUpload.secure_url
+                    }
+                }
+            } else {
+                data = {
+                    name: req.body.name,
+                    email: req.body.email,
+                    role: req.body.role,
+                    status: req.body.state
+                }
+            }
+            await UserModel.findByIdAndUpdate(req.params.id, data)
+            req.flash('success', 'User successfully updated')
+            res.redirect('/admin/users/list')
+        } catch (err) {
+            log.error('userUpdate(): catch error: %o', err)
+        }
+    }
+
     static pageNotFound = async (req, res) => {
         try {
-            log.info('pageNotFound(): req: %o', utils.reqObject(req, res))
+            // log.info('pageNotFound(): req: %o', utils.reqObject(req, res))
+            log.info('pageNotFound(): req.params: %o', req.params)
+            log.info('pageNotFound(): req.query: %o', req.query)
+            log.info('pageNotFound(): req.body: %o', req.body)
             const responseObject = {
                 title: 'Dashboard',
                 user: req.decoded,
                 successMessage: req.flash('success'),
                 errorMessage: req.flash('error')
             }
-            res.render('admin/404', responseObject)
+            return res.render('admin/404', responseObject)
         } catch (err) {
             log.error('pageNotFound(): catch error: %o', err)
         }

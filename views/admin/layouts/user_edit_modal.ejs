@@ -10,7 +10,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="login-form">
-					<form action="/admin/delete-user" method="post" enctype="multipart/form-data">
+					<form action="/" method="post" enctype="multipart/form-data">
 						<div class="form-group">
 							<label>Name</label>
 							<input class="au-input au-input--full" type="text" name="name" placeholder="Name" required>
@@ -46,22 +46,12 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label>Theme</label>
-							<select name="theme" class="form-control color-options" required>
-								<option class="theme-1" value="theme-1">theme-1</option>
-								<option class="theme-2" value="theme-2">theme-2</option>
-								<option class="theme-3" value="theme-3">theme-3</option>
-								<option class="theme-4" value="theme-4">theme-4</option>
-								<option class="theme-5" value="theme-5">theme-5</option>
-								<option class="theme-6" value="theme-6">theme-6</option>
-								<option class="theme-7" value="theme-7">theme-7</option>
-								<option class="theme-8" value="theme-8">theme-8</option>
-							</select>
+							<label for="profile_image_edit">Profile Image</label>
+							<img class="profile_image_preview" src="" alt="Profile Image Preview" width="200px">
+							<input class="" type="file" name="profile_image" id="profile_image_edit">
 						</div>
-						<div class="form-group">
-							<label>Profile Image</label>
-							<img class="profile_image_preview" src="" alt="Image Preview">
-						</div>
+						<!-- Display the preview image -->
+						<img id="preview-image-edit" alt="Profile Image Preview">
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -78,11 +68,25 @@
 		console.log("Hello ...");
 		var item = JSON.parse(itemJson);
 		console.log(item);
+
+		$("#editUserModal .profile_image_preview").show();
+		$("#profile_image_edit").val('');
+		$("#preview-image-edit").hide();
+
+		if (item._id) {
+			$("#editUserModal form").attr("action", `/admin/user/${item._id}/update`);
+		} else {
+			$("#editUserModal form").attr("action", "#");
+		}
 		$("#editUserModal input[name='name']").val(item.name);
 		$("#editUserModal input[name='email']").val(item.email);
 		$("#editUserModal select[name='role']").val((item.role).toLowerCase());
 		$("#editUserModal .form-check-input").filter('[value="' + (item.status).toLowerCase() + '"]').prop('checked', true);
 		$("#editUserModal select[name='theme']").val(item.theme);
-		$("#editUserModal .profile_image_preview").attr("src", item.profileImage.url);
+		if (item.profile_image && item.profile_image.url) {
+			$("#editUserModal .profile_image_preview").attr("src", item.profile_image.url);
+		} else {
+			$("#editUserModal .profile_image_preview").attr("src", "/cool_admin/images/dummy_profile_image.png");
+		}
 	}
 </script>

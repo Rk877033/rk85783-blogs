@@ -49,7 +49,24 @@ app.use('/', web)
 app.use('/api', api)
 
 // 404 Error Handler
-app.use((req, res, next) => {
+// app.use('**', (req, res, next) => {
+//     res.status(404)
+//     // Check if the request wants JSON
+//     if ((req.originalUrl).includes('/api')) {
+//         if (req.accepts('json')) {
+//             return res.json({
+//                 status: false,
+//                 error: 'Page not found'
+//             })
+//         }
+//     }
+//     // Default to HTML
+//     if ((req.originalUrl).includes('/admin')) {
+//         return res.redirect('/admin/404')
+//     }
+//     return res.render('front/404.ejs')
+// })
+app.all('*', (req, res, next) => {
     res.status(404)
     // Check if the request wants JSON
     if ((req.originalUrl).includes('/api')) {
@@ -64,7 +81,7 @@ app.use((req, res, next) => {
     if ((req.originalUrl).includes('/admin')) {
         return res.redirect('/admin/404')
     }
-    res.render('front/404.ejs')
+    return res.render('front/404.ejs')
 })
 
 // Start the server

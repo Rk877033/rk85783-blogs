@@ -51,5 +51,34 @@
 				$("#preview-image").show();
 			}
 		}
+
+		// Add change event listener to file input
+		$('#profile_image_edit').change(function () {
+			previewImage();
+		});
+
+		function previewImage() {
+			// Get the file input
+			var fileInput = $('#profile_image_edit')[0];
+
+			// Get the preview image element
+			var previewImage = $('#preview-image-edit');
+
+			// Check if a file is selected
+			if (fileInput.files && fileInput.files[0]) {
+				// Create a FileReader object to read the file
+				var reader = new FileReader();
+
+				// Set the image source when the file is loaded
+				reader.onload = function (e) {
+					previewImage.attr('src', e.target.result);
+				};
+
+				// Read the file as a data URL
+				reader.readAsDataURL(fileInput.files[0]);
+				$("#preview-image-edit").show();
+				$("#editUserModal .profile_image_preview").hide();
+			}
+		}
 	});
 </script>
