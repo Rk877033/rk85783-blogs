@@ -28,6 +28,7 @@ router.get('/author/dashboard', checkAuth, AuthorController.dashboard)
 router.get('/admin/dashboard', checkAuth, AdminController.dashboard)
 router.get('/admin/users/list', checkAuth, AdminController.userList)
 router.post('/admin/user/add', checkAuth, AdminController.userAdd)
+router.post('/admin/user/:id/delete', checkAuth, AdminController.userDelete)
 router.get('/admin/404', checkAuth, AdminController.pageNotFound)
 
 module.exports = router

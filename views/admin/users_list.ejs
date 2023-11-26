@@ -104,9 +104,9 @@
 															<%= moment(item.updatedAt).format('MM/DD/YYYY HH:mm:ss') %>
 														</td>
 														<td>
-															<button data-toggle="modal" data-target="#viewUserModal" onclick="openViewModal(JSON.stringify(<%= JSON.stringify(item) %>))"><i class="fa fa-eye text-warning"></i></button>
-															<button data-toggle="modal" data-target="#editUserModal" onclick="openEditModal(JSON.stringify(<%= JSON.stringify(item) %>))"><i class="fa fa-pencil-square-o text-success"></i></button>
-															<button data-toggle="modal" data-target="#deleteUserModal"><i class="fa fa-trash text-danger"></i></button>
+															<button data-toggle="modal" data-target="#viewUserModal"   onclick="openViewModal(JSON.stringify(<%= JSON.stringify(item) %>))"><i class="fa fa-eye text-warning"></i></button>
+															<button data-toggle="modal" data-target="#editUserModal"   onclick="openEditModal(JSON.stringify(<%= JSON.stringify(item) %>))"><i class="fa fa-pencil-square-o text-success"></i></button>
+															<button data-toggle="modal" data-target="#deleteUserModal" onclick="deleteUserModal(JSON.stringify(<%= JSON.stringify(item) %>))"><i class="fa fa-trash text-danger"></i></button>
 														</td>
 													</tr>
 													<% }) %>

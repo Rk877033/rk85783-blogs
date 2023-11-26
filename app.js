@@ -17,6 +17,7 @@ const app = express()
 
 // View Engine
 app.set('view engine', 'ejs')
+
 // Helper function to make environment variables accessible in EJS files
 app.locals.env = process.env
 app.locals.moment = moment
@@ -33,10 +34,6 @@ app.use(session({
 app.use(flash())
 
 // insert CSS, JS and images
-// app.use(express.static('public'))
-// app.use('/cool_admin', express.static('cool_admin'))
-// app.use('/cloapedia', express.static('cloapedia'))
-// app.use('/login_register', express.static('login_register'))
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Parse URL-encoded bodies
@@ -57,13 +54,13 @@ app.use((req, res, next) => {
     // Check if the request wants JSON
     if ((req.originalUrl).includes('/api')) {
         if (req.accepts('json')) {
-            res.json({ error: 'Page not found' })
-            return
+            return res.json({
+                status: false,
+                error: 'Page not found'
+            })
         }
     }
     // Default to HTML
-    // res.send('<h1>Page not found</h1>')
-    // res.render('front/404.ejs')
     if ((req.originalUrl).includes('/admin')) {
         return res.redirect('/admin/404')
     }

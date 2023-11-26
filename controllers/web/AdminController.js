@@ -88,9 +88,23 @@ class AdminController {
             await result.save()
             log.info('userAdd(): success: new created id: %d', result.id)
             req.flash('success', 'Registration Successfully, Please Login')
-            res.redirect('/admin/users')
+            res.redirect('/admin/users/list')
         } catch (err) {
             log.error('userAdd(): catch error: %o', err)
+        }
+    }
+
+    static userDelete = async (req, res) => {
+        try {
+            log.info('userDelete(): req.params: %o', req.params)
+            const data = await UserModel.findByIdAndDelete(req.params.id)
+            console.log(data)
+            if (data) {
+                req.flash('success', 'User successfully deleted')
+            }
+            res.redirect('/admin/users/list')
+        } catch (err) {
+            log.error('userDelete(): catch error: %o', err)
         }
     }
 
