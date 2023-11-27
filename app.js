@@ -2,6 +2,7 @@ const express = require('express')
 const dotenv = require('dotenv')
 const moment = require('moment')
 const path = require('path')
+const cors = require('cors')
 dotenv.config()
 const session = require('express-session')
 const connectDB = require('./db/connect_db')
@@ -36,6 +37,8 @@ app.use(flash())
 // insert CSS, JS and images
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.use(cors())
+
 // Parse URL-encoded bodies
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -49,23 +52,6 @@ app.use('/', web)
 app.use('/api', api)
 
 // 404 Error Handler
-// app.use('**', (req, res, next) => {
-//     res.status(404)
-//     // Check if the request wants JSON
-//     if ((req.originalUrl).includes('/api')) {
-//         if (req.accepts('json')) {
-//             return res.json({
-//                 status: false,
-//                 error: 'Page not found'
-//             })
-//         }
-//     }
-//     // Default to HTML
-//     if ((req.originalUrl).includes('/admin')) {
-//         return res.redirect('/admin/404')
-//     }
-//     return res.render('front/404.ejs')
-// })
 app.all('*', (req, res, next) => {
     res.status(404)
     // Check if the request wants JSON
